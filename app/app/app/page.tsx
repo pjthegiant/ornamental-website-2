@@ -8,7 +8,6 @@ import {
   ChevronRight, Menu, X 
 } from 'lucide-react';
 
-// --- DATA ---
 const PROJECT_TYPES = [
   { id: 'fence', label: 'Ornamental Fence', basePrice: 80, unit: 'Linear Feet' },
   { id: 'railing', label: 'Stair/Balcony Railing', basePrice: 60, unit: 'Linear Feet' },
@@ -32,14 +31,11 @@ const PROJECTS = [
   { id: 6, category: 'Railings', title: 'Ornamental Scroll', src: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2000' },
 ];
 
-// --- COMPONENTS ---
-
 export default function FullWebsite() {
   const [quoteType, setQuoteType] = useState(PROJECT_TYPES[0]);
   const [length, setLength] = useState(20);
   const [complexity, setComplexity] = useState(COMPLEXITY_LEVELS[0]);
   const [filter, setFilter] = useState('All');
-  const [contactStatus, setContactStatus] = useState('idle');
 
   const estimate = useMemo(() => {
     let total = length * quoteType.basePrice * complexity.multiplier;
@@ -68,14 +64,13 @@ export default function FullWebsite() {
           </div>
         </div>
         <div className="flex justify-between items-center px-6 lg:px-12 py-6">
-          <div className="flex flex-col">
+          <div className="flex flex-col text-left">
             <span className="text-xl lg:text-2xl font-black tracking-tighter text-offWhite">ORNAMENTAL DESIGN</span>
             <span className="text-[10px] tracking-[0.4em] text-goldAccent uppercase font-bold">& Fabrication LLC</span>
           </div>
           <div className="hidden md:flex gap-10 text-xs font-bold tracking-widest items-center">
-            <a href="#services" className="hover:text-goldAccent transition-colors">SERVICES</a>
-            <a href="#quote" className="hover:text-goldAccent transition-colors">ESTIMATOR</a>
-            <a href="#portfolio" className="hover:text-goldAccent transition-colors">WORK</a>
+            <a href="#quote" className="hover:text-goldAccent transition-colors uppercase">Estimator</a>
+            <a href="#portfolio" className="hover:text-goldAccent transition-colors uppercase">Portfolio</a>
             <a href="#quote" className="bg-goldAccent text-charcoal px-6 py-3 hover:bg-white transition-colors">GET QUOTE</a>
           </div>
         </div>
@@ -83,10 +78,11 @@ export default function FullWebsite() {
 
       {/* 2. HERO SECTION */}
       <section className="relative h-screen flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-charcoal/80" />
+        <div className="absolute inset-0 bg-charcoal">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070" className="w-full h-full object-cover opacity-30" alt="Background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full text-left">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <span className="text-goldAccent font-bold tracking-[0.3em] uppercase text-xs">Premium Fabrication SLC</span>
             <h1 className="text-6xl lg:text-9xl font-black mt-4 mb-8 leading-none tracking-tighter">
@@ -97,7 +93,6 @@ export default function FullWebsite() {
             </p>
             <div className="flex gap-4">
               <a href="#quote" className="bg-goldAccent text-charcoal px-8 py-5 font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors">Instant Estimate</a>
-              <a href="#portfolio" className="border border-white/20 px-8 py-5 font-bold uppercase tracking-widest text-sm hover:border-goldAccent hover:text-goldAccent transition-colors">View Portfolio</a>
             </div>
           </motion.div>
         </div>
@@ -105,14 +100,14 @@ export default function FullWebsite() {
 
       {/* 3. QUOTE ENGINE */}
       <section id="quote" className="py-32 bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6 text-left">
           <div className="grid lg:grid-cols-2 gap-20">
             <div>
               <h2 className="text-4xl lg:text-6xl font-bold mb-8 tracking-tighter">Project <span className="text-goldAccent italic font-light">Estimator</span></h2>
-              <p className="text-gray-500 mb-12 max-w-md leading-relaxed">Adjust the parameters to get an immediate budgetary ballpark for your fabrication project.</p>
+              <p className="text-gray-500 mb-12 max-w-md leading-relaxed text-left">Adjust the parameters to get an immediate budgetary ballpark for your fabrication project.</p>
               
               <div className="space-y-12">
-                <div>
+                <div className="text-left">
                   <label className="text-[10px] font-black tracking-widest text-goldAccent uppercase mb-4 block">1. Category</label>
                   <div className="flex flex-wrap gap-4">
                     {PROJECT_TYPES.map(p => (
@@ -123,7 +118,7 @@ export default function FullWebsite() {
                   </div>
                 </div>
 
-                <div>
+                <div className="text-left">
                   <div className="flex justify-between mb-4">
                     <label className="text-[10px] font-black tracking-widest text-goldAccent uppercase block">2. Size ({quoteType.unit})</label>
                     <span className="font-bold text-goldAccent">{length}ft</span>
@@ -131,7 +126,7 @@ export default function FullWebsite() {
                   <input type="range" min="4" max="300" value={length} onChange={(e) => setLength(parseInt(e.target.value))} className="w-full h-1 bg-slateMetal accent-goldAccent appearance-none cursor-pointer" />
                 </div>
 
-                <div>
+                <div className="text-left">
                   <label className="text-[10px] font-black tracking-widest text-goldAccent uppercase mb-4 block">3. Detail Level</label>
                   <div className="space-y-3">
                     {COMPLEXITY_LEVELS.map(c => (
@@ -150,7 +145,7 @@ export default function FullWebsite() {
                <div className="text-7xl lg:text-8xl font-black mb-4 tracking-tighter">
                 <span className="text-2xl align-top text-goldAccent mr-2">$</span>{estimate.toLocaleString()}
                </div>
-               <p className="text-xs text-gray-600 italic mb-10 leading-relaxed italic">Includes fabrication and standard powder coating. Final price depends on site variables.</p>
+               <p className="text-xs text-gray-600 mb-10 leading-relaxed italic uppercase">Ballpark pricing for fabrication and powder coating.</p>
                <a href="#contact" className="bg-goldAccent text-charcoal py-6 font-bold uppercase tracking-[0.2em] text-xs hover:bg-white transition-all">Submit for Review</a>
             </div>
           </div>
@@ -158,9 +153,9 @@ export default function FullWebsite() {
       </section>
 
       {/* 4. PORTFOLIO */}
-      <section id="portfolio" className="py-32 bg-charcoal overflow-hidden">
+      <section id="portfolio" className="py-32 bg-charcoal overflow-hidden text-left">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-left">
             <h2 className="text-4xl lg:text-6xl font-bold tracking-tighter leading-none">THE <br/><span className="text-goldAccent">COLLECTION</span></h2>
             <div className="flex flex-wrap gap-2">
               {CATEGORIES.map(cat => (
@@ -171,13 +166,13 @@ export default function FullWebsite() {
             </div>
           </div>
 
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-1">
-            <AnimatePresence>
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
+            <AnimatePresence mode="popLayout">
               {filteredProjects.map(proj => (
-                <motion.div key={proj.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative group aspect-[4/5] bg-slateMetal overflow-hidden">
-                  <img src={proj.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100" />
+                <motion.div key={proj.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative group aspect-[4/5] bg-slateMetal overflow-hidden border border-slateMetal/50">
+                  <img src={proj.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100" alt={proj.title} />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent opacity-80" />
-                  <div className="absolute bottom-10 left-10">
+                  <div className="absolute bottom-10 left-10 text-left">
                     <p className="text-goldAccent text-[10px] font-bold tracking-widest uppercase mb-1">{proj.category}</p>
                     <h3 className="text-xl font-bold uppercase leading-none">{proj.title}</h3>
                   </div>
@@ -189,10 +184,10 @@ export default function FullWebsite() {
       </section>
 
       {/* 5. CONTACT SECTION */}
-      <section id="contact" className="py-32 bg-[#0a0a0a]">
+      <section id="contact" className="py-32 bg-[#0a0a0a] text-left">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20">
-          <div>
-            <h2 className="text-4xl lg:text-6xl font-bold tracking-tighter mb-10">READY TO <br/><span className="text-goldAccent italic font-light">START?</span></h2>
+          <div className="text-left">
+            <h2 className="text-4xl lg:text-6xl font-bold tracking-tighter mb-10 leading-none uppercase">Ready to <br/><span className="text-goldAccent italic font-light tracking-normal">Start?</span></h2>
             <div className="space-y-10">
               <div className="flex gap-6">
                 <div className="w-12 h-12 border border-goldAccent/30 flex items-center justify-center text-goldAccent"><MapPin size={20}/></div>
@@ -204,22 +199,21 @@ export default function FullWebsite() {
               </div>
             </div>
           </div>
-          <div className="bg-charcoal p-10 border border-slateMetal">
+          <div className="bg-charcoal p-10 border border-slateMetal text-left">
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <input type="text" placeholder="NAME" className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent" />
-                <input type="email" placeholder="EMAIL" className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent" />
+                <input type="text" placeholder="NAME" className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent text-offWhite" />
+                <input type="email" placeholder="EMAIL" className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent text-offWhite" />
               </div>
-              <textarea placeholder="PROJECT DESCRIPTION" rows={4} className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent resize-none" />
+              <textarea placeholder="PROJECT DESCRIPTION" rows={4} className="w-full bg-transparent border-b border-slateMetal py-4 text-xs outline-none focus:border-goldAccent resize-none text-offWhite" />
               <button className="w-full bg-goldAccent text-charcoal font-black py-6 tracking-[0.3em] text-[10px] uppercase hover:bg-white transition-all">Submit Inquiry</button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="py-10 text-center border-t border-slateMetal/20 text-[9px] tracking-[0.5em] text-gray-600 uppercase">
-        © {new Date().getFullYear()} ORNAMENTAL DESIGN & FABRICATION LLC | 5475 Riley Lane, Salt Lake City
+        &copy; {new Date().getFullYear()} ORNAMENTAL DESIGN & FABRICATION LLC | 5475 RILEY LANE, SALT LAKE CITY
       </footer>
     </div>
   );
